@@ -23,6 +23,10 @@ public class Button {
      * @param button the button on the GenericHID to track, a value 1 through 12
      * @param t the DetectionType to use. See
      *            {@link com.team4800.buttonapi.Button.DetectionType}
+     * @throws IllegalArgumentException thrown if the GeneridHID is null
+     * @throws IllegalArgumentException if the DectionType is null
+     * @throws IndexOutOfBoundsException if the button is not a value 1 through
+     *             12
      */
     public Button(GenericHID g, int button, DetectionType t) {
         if (g == null) {
@@ -128,5 +132,56 @@ public class Button {
         default:
             return false;
         }
+    }
+
+    /**
+     * Gets the current detection type.
+     * 
+     * @return the detection type currently being used
+     */
+    public DetectionType getDetectionType() {
+        return t;
+    }
+
+    /**
+     * Sets the detection type to the given type.
+     * 
+     * @param t the new detection type
+     */
+    public void setDetectionType(DetectionType t) {
+        this.t = t;
+    }
+
+    /**
+     * Gets the button currently being tracked.
+     * 
+     * @return the button being tracked
+     */
+    public int getButton() {
+        return button;
+    }
+
+    /**
+     * Sets the button to track to the given button. <b>Value must be 1 through
+     * 12</b>
+     * 
+     * @param button the new button to be tracked
+     * @throws IndexOutOfBoundsException if the button is not a value 1 through
+     *             12
+     */
+    public void setButton(int button) {
+        if (button < 1 || button > 12) {
+            throw new IndexOutOfBoundsException("The button must be a value 1 through 12. Given: " + button);
+        }
+        this.button = button;
+    }
+
+    /**
+     * Gets the GenericHID being tracked
+     * 
+     * @return the tracked GenericHID
+     */
+    public GenericHID getGenericHID() {
+        return g;
     }
 }
